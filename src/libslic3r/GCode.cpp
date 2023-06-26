@@ -1539,8 +1539,8 @@ void GCode::_do_export(Print& print, GCodeOutputStream &file, ThumbnailsGenerato
         file.write_format("; first_layer_bed_temperature = %d\n",
                           first_layer_bed_temperature);
         file.write_format(
-            "; first_layer_temperature = %d\n",
-            print.config().nozzle_temperature_initial_layer.get_at(0));
+            "; first_layer_temperature = %s\n",
+            print.config().opt_serialize("nozzle_temperature_initial_layer").c_str());
         file.write("; CONFIG_BLOCK_END\n\n");
       } else {
         DoExport::export_thumbnails_to_file(
@@ -2126,7 +2126,7 @@ void GCode::_do_export(Print& print, GCodeOutputStream &file, ThumbnailsGenerato
       int first_layer_bed_temperature = get_bed_temperature(0, true, print.config().curr_bed_type);
       file.write_format("; first_layer_bed_temperature = %d\n", first_layer_bed_temperature);
       file.write_format("; bed_shape = %s\n", print.full_print_config().opt_serialize("printable_area").c_str());
-      file.write_format("; first_layer_temperature = %d\n", print.config().nozzle_temperature_initial_layer.get_at(0));
+      file.write_format("; first_layer_temperature = %s\n", print.config().opt_serialize("nozzle_temperature_initial_layer").c_str());
       file.write_format("; first_layer_height = %.3f\n", print.config().initial_layer_print_height.value);
         
         //SF TODO
